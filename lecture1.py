@@ -1,5 +1,4 @@
-a = 0
-for i in range(1, 101):
-    a += i
-print(a)
+sum = sum(range(2, 101, 2))
+
+print(sum)
 
