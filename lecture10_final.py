@@ -33,21 +33,22 @@ class SearchTest(unittest.TestCase):
         elm.send_keys(Keys.ENTER)
 
         # Шаг 3. Проверяем, что первый результат – ссылка на сайт selenide.org.
-        first_result = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'li.reg:nth-child(1) a')))
+        first_result = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, 'h3.title a')))
         result_url = first_result.get_attribute('href')
         assert 'selenide.org' in result_url, 'Первый результат не является ссылкой на selenide.org'
 
         # Шаг 4. Перейти в раздел поиска изображений
-        images_link = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Images')))
+        images_link = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.LINK_TEXT, 'Images')))
         images_link.click()
 
         # Шаг 5. Проверить, что первое изображение связано с сайтом selenide.org.
-        first_image = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'img.img')))
+        first_image = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'img.img')))
         img_alt_text = first_image.get_attribute('alt')
         assert 'selenide' in img_alt_text.lower(), 'Первое изображение не связано с сайтом selenide.org'
 
         # Шаг 6. Вернуться в раздел поиска Все
-        all_link = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located((By.LINK_TEXT, 'All')))
+        all_link = WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.LINK_TEXT, 'All')))
         all_link.click()
 
         # Шаг 7. Проверить, что первый результат такой же, как и на шаге 3.
